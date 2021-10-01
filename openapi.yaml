@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info :
+  title: Xmeme
+  description: meme app
+  contact:
+    name: developer group
+    url: http://tutorialPedia.com
+  version: 1.0.0
+servers:
+   - url: http://devapi.com
+   - url: http://prodapi.com
+paths:
+  /memes:
+    description: fetching 100 memes
+    get:
+      description: operation to fetch memes
+      parameters: 
+        - in : query
+          name: memeId
+          required: false
+          schema:
+            type: string
+            example: uuid
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    memeId:
+                     type: string
+                     example: uuid
+                    memeUrl:
+                     type: string
+                     example: https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
+                     
+                    memeCreator:
+                     type: string
+                     example: Xavier
+                  
+                    memeDate:
+                     type: string
+                     example: 1/10/2021
+                  
+                    memeCaption:
+                     type: string
+                     example: this is my new meme
+    post:
+      description: create a new meme
+      requestBody:
+        content:
+          application/json:
+           schema:
+             type: object
+             properties:
+                   memeId:
+                     type: string
+                     example: uuid
+                   memeUrl:
+                     type: string
+                     example: https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
+                     
+                   memeCreator:
+                     type: string
+                     example: Xavier
+                  
+                   memeDate:
+                     type: string
+                     example: 1/10/2021
+                  
+                   memeCaption:
+                     type: string
+                     example: this is my new meme
+      responses:
+        201:
+           description: Record Successfully added
+    patch:
+      description: lets you update the existing memes
+      parameters: 
+         - in : query
+           name: memeurl
+           required: true
+           schema:
+              type: string
+              example:  https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
+         - in : query   
+           name : caption
+           required: true
+           schema:
+             type: string
+             example: girl meme
+             
+      responses:
+        202:
+          description: meme edit successfully
+            
+        
+        
+                   
+             
+  
