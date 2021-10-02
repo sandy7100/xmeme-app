@@ -36,18 +36,48 @@ paths:
                     memeUrl:
                      type: string
                      example: https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
-                     
                     memeCreator:
                      type: string
                      example: Xavier
-                  
                     memeDate:
                      type: string
                      example: 1/10/2021
-                  
                     memeCaption:
                      type: string
                      example: this is my new meme
+        204:
+         description: not content
+         content:
+          application/json:
+             schema:
+               type: object
+               properties: 
+                  messsage: 
+                    type: string
+                    example: no meme is available in database
+        400:
+         description: Bad request
+         content:
+          application/json:
+             schema:
+               type: object
+               properties: 
+                  messsage: 
+                    type: string
+                    example: invalid request plz try again later
+        404:
+         description: not found
+         content:
+          application/json:
+             schema:
+               type: object
+               properties: 
+                  messsage: 
+                    type: string
+                    example: meme not found
+        
+        
+        
     post:
       description: create a new meme
       requestBody:
@@ -56,32 +86,57 @@ paths:
            schema:
              type: object
              properties:
-                   memeId:
-                     type: string
-                     example: uuid
                    memeUrl:
                      type: string
                      example: https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
-                     
                    memeCreator:
                      type: string
                      example: Xavier
-                  
-                   memeDate:
-                     type: string
-                     example: 1/10/2021
-                  
                    memeCaption:
                      type: string
                      example: this is my new meme
       responses:
         201:
-           description: Record Successfully added
+          description: Record Successfully added
+          content:
+            application/json:
+             schema:
+               type: object
+               properties:
+                  memeUrl:
+                     type: string
+                     example: https://cdn.vox-cdn.com/thumbor/cV8X8BZ-aGs8pv3D-sCMr5fQZyI=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19933026/image.png
+                  memeCreator:
+                     type: string
+                     example: Xavier
+                  memeCaption:
+                     type: string
+                     example: this is my new meme
+                  memeid:
+                     type: string
+                     example: 1df65a3a-cd62-4077-a376-886e36da85ca
+                  memedate:
+                     type: string
+                     example: "2021-10-02T13:45:29.677668"
+              
+        409:
+         description: conflict
+         content:
+          application/json:
+             schema:
+               type: object
+               properties: 
+                  messsage: 
+                    type: string
+                    example: dublicate meme found in database
+                    
+  /memes/{id}:
     patch:
+      
       description: lets you update the existing memes
       parameters: 
-         - in : query
-           name: memeurl
+         - in : path
+           name: id 
            required: true
            schema:
               type: string
@@ -94,8 +149,31 @@ paths:
              example: girl meme
              
       responses:
-        202:
-          description: meme edit successfully
+        200:
+          description: request successfully
+          content:
+           application/json:
+             schema:
+               type: object
+               properties: 
+                  messsage: 
+                    type: string
+                    example: meme edit succesfully
+                    
+        400:
+         description: bad request
+         content:
+           application/json:
+             schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: invalid request plz try again
+        
+          
+         
+          
             
         
         
